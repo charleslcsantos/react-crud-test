@@ -1,0 +1,20 @@
+// Responsive
+$min_desktop_size: 769px;
+$min_desktop_medium_size: 1024px;
+$min_desktop_large_size: 1440px;
+$min-desktop-height: 840px;
+
+$max_tablet_size: 768px;
+$min_tablet_size: 427px;
+$max_mobile_size: 426px;
+
+$blue: #2980b9;
+$lightBlue: #3498db;
+$white: #ecf0f1;
+$gray: #7f8c8d;
+
+$primary_color: #68b539;
+$primary_color_light: lighten($primary_color, 10%);
+$primary_color_dark: darken($primary_color, 5%);
+
+$default_element_height: 40px;

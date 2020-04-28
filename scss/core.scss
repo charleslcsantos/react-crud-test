@@ -1,0 +1,11 @@
+@import "mixins/responsive";
+@import "mixins/helpers";
+@import "reset";
+
+@import "components/card";
+@import "components/button";
+
+body {
+	background-color: #312f33;
+  color: #aca8b1;
+}

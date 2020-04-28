@@ -1,0 +1,17 @@
+.card.card-product {
+  align-items: center;
+  width: 60%;
+  padding: 1rem 0;
+  .product__thumbnail {
+    width: 100%;
+  }
+  .product__name {
+    font-size: .9rem;
+    margin: 1rem 0 .5rem;
+    font-weight: 100;
+  }
+  .product__price {
+    margin: 0 0 1rem;
+    font-weight: 600;
+  }
+}

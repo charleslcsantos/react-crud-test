@@ -1,21 +1,24 @@
 import "./UserCard.scss";
 import React, { Component } from "react";
 import UserForm from "../user-form/UserForm";
+import { IconEdit } from "../../shared/icons/icon-edit/IconEdit";
+import { IconRemove } from "../../shared/icons/icon-remove/IconRemove";
+import { IconArrow } from "../../shared/icons/icon-arrow/IconArrow";
 
 export default class UserCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       canShowDetail: false,
-      canEditUser: true,
-      user: {
-        id: 2,
-        name: `Charlinho`,
-        email: `email@email.com`,
-        username: `dovisk`,
-        phone: `(32) 05940-5987`,
-      },
+      canEditUser: false,
+      userBackup: {},
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      userBackup: this.props.user,
+    });
   }
 
   openDetail() {
@@ -26,7 +29,22 @@ export default class UserCard extends Component {
     });
   }
 
-  componentDidMount() {}
+  edit(user) {
+    // if (user) {
+    //   user = user;
+    // } else {
+    //   user = this.userBackup;
+    // }
+    this.setState({
+      canEditUser: !this.state.canEditUser,
+    });
+  }
+
+  remove(user) {
+    if (window.confirm("Tem certeza que deseja apagar o registro?")) {
+      // this.onClickRemove.emit();
+    }
+  }
 
   render() {
     return (
@@ -40,7 +58,8 @@ export default class UserCard extends Component {
           <div className="user-card__pic">
             <img src={this.props.user.avatar} alt="user avatar" />
           </div>
-          <div className="user-card__title"> nome </div>
+          <div className="user-card__title"> {this.props.user.name} </div>
+          <IconArrow></IconArrow>
         </div>
         {this.state.canShowDetail && (
           <div className="user-detail">
@@ -61,10 +80,22 @@ export default class UserCard extends Component {
                 <div className="user-info" title="Telefone">
                   {this.props.user.phone}
                 </div>
-                <div className="list__actions">editar e remover</div>
+                <div className="list__actions">
+                  <button className="btn" onClick={() => this.edit()}>
+                    <IconEdit>Editar</IconEdit>
+                  </button>
+                  <button className="btn" onClick={() => this.remove()}>
+                    <IconRemove>Remover</IconRemove>
+                  </button>
+                </div>
               </div>
             )}
-            {this.state.canEditUser && <UserForm user={this.props.user} />}
+            {this.state.canEditUser && (
+              <UserForm
+                user={this.props.user}
+                onClickCancel={() => this.edit()}
+              />
+            )}
           </div>
         )}
       </div>

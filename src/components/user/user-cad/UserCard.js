@@ -1,12 +1,13 @@
 import "./UserCard.scss";
 import React, { Component } from "react";
+import UserForm from "../user-form/UserForm";
 
 export default class UserCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       canShowDetail: false,
-      canEditUser: false,
+      canEditUser: true,
       user: {
         id: 2,
         name: `Charlinho`,
@@ -63,6 +64,7 @@ export default class UserCard extends Component {
                 <div className="list__actions">editar e remover</div>
               </div>
             )}
+            {this.state.canEditUser && <UserForm user={this.props.user} />}
           </div>
         )}
       </div>

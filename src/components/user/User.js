@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserCard from "./user-cad/UserCard";
 import UserService from "./UserService";
 import "./User.scss";
+import UserForm from "./user-form/UserForm";
 
 export default class User extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ export default class User extends Component {
         <div className="container">
           <div className="new-user">
             <h2>Criar novos usuários</h2>
-            <div>form</div>
+            <UserForm />
           </div>
 
           <div className="list user-list">

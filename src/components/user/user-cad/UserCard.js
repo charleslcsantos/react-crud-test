@@ -17,34 +17,36 @@ export default class UserCard extends Component {
     };
   }
 
+  componentDidMount() {}
+
   render() {
+    console.log("this.props.user", this.props.user);
     return (
       <div className="wrapper">
         <div className="user-card user-card--opened">
           <div className="user-card__pic">
-            <img src={this.state.user.avatar} alt="user avatar" />
+            <img src={this.props.user.avatar} alt="user avatar" />
           </div>
           <div className="user-card__title"> nome </div>
         </div>
-
         {this.state.canShowDetail && (
           <div className="user-detail">
             {!this.state.canEditUser && (
               <div className="read-only">
                 <div className="user-info" title="#">
-                  {this.state.user.id}
+                  {this.props.user.id}
                 </div>
                 <div className="user-info" title="Nome">
-                  {this.state.user.name}
+                  {this.props.user.name}
                 </div>
                 <div className="user-info" title="Email">
-                  {this.state.user.email}
+                  {this.props.user.email}
                 </div>
                 <div className="user-info" title="Username">
-                  {this.state.user.username}
+                  {this.props.user.username}
                 </div>
                 <div className="user-info" title="Telefone">
-                  {this.state.user.phone}
+                  {this.props.user.phone}
                 </div>
                 <div className="list__actions">editar e remover</div>
               </div>

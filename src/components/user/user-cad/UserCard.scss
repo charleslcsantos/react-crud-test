@@ -84,7 +84,10 @@
         font-weight: 800;
         color: #5d5d5d;
         @include min-desktop-size {
-          content: none;
+          display: block;
+          font-size: 0.55rem;
+          font-weight: 400;
+          letter-spacing: 0.02rem;
         }
       }
     }
@@ -93,14 +96,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    .btn {
-      background: none;
-      margin: 0;
-      padding: 0;
-    }
-    svg {
-      margin-left: 0.5rem;
-      cursor: pointer;
-    }
   }
 }

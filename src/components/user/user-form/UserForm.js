@@ -36,11 +36,10 @@ export default class UserForm extends Component {
     }
   }
 
-  save(user) {
-    if (!user) {
-      user = this.state.user;
-    }
-    console.log("user", user);
+  save(e) {
+    e.preventDefault();
+    const user = this.state.user;
+    UserService.save(user);
 
     // UserService
     //   .save(user)
@@ -52,7 +51,7 @@ export default class UserForm extends Component {
 
   render() {
     return (
-      <form className="user-form">
+      <form className="user-form" onSubmit={(e) => this.save(e)}>
         <input
           type="text"
           className="form-control form-control-sm"
@@ -73,18 +72,18 @@ export default class UserForm extends Component {
         <input
           type="text"
           className="form-control form-control-sm"
-          value={this.state.user.phone}
-          onChange={(e) => this.handleChange("phone", e.target.value)}
-          name="Telefone"
-          placeholder="Telefone"
-        />
-        <input
-          type="text"
-          className="form-control form-control-sm"
           value={this.state.user.username}
           onChange={(e) => this.handleChange("username", e.target.value)}
           name="Username"
           placeholder="Username"
+        />
+        <input
+          type="text"
+          className="form-control form-control-sm"
+          value={this.state.user.phone}
+          onChange={(e) => this.handleChange("phone", e.target.value)}
+          name="Telefone"
+          placeholder="Telefone"
         />
         {!this.props.user.id && (
           <select
@@ -94,13 +93,13 @@ export default class UserForm extends Component {
             onChange={(e) => this.handleChange("gender", e.target.value)}
           >
             <option value="men">Masculino</option>
-            <option value="woman">Feminino</option>
+            <option value="women">Feminino</option>
           </select>
         )}
         <button
           className="btn btn-sm btn-outline-success"
           type="submit"
-          // [disabled]="!formUser.valid"
+          disabled={!this.state.user.name || this.state.user.name.length <= 0}
         >
           Salvar
         </button>

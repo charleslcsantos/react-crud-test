@@ -5,7 +5,7 @@ export default class UserCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      canShowDetail: true,
+      canShowDetail: false,
       canEditUser: false,
       user: {
         id: 2,
@@ -17,13 +17,25 @@ export default class UserCard extends Component {
     };
   }
 
+  openDetail() {
+    const canShow = !this.state.canShowDetail;
+
+    this.setState({
+      canShowDetail: canShow,
+    });
+  }
+
   componentDidMount() {}
 
   render() {
-    console.log("this.props.user", this.props.user);
     return (
       <div className="wrapper">
-        <div className="user-card user-card--opened">
+        <div
+          className={`user-card ${
+            this.state.canShowDetail ? "user-card--opened" : ""
+          }`}
+          onClick={() => this.openDetail()}
+        >
           <div className="user-card__pic">
             <img src={this.props.user.avatar} alt="user avatar" />
           </div>

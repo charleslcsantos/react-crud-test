@@ -92,6 +92,10 @@ export default class User extends Component {
           ))}
         </div>
         <div className="container">
+          <img
+            className="logo"
+            src="https://agenciamaori.com.br/i.systems/logo-Isystem_positivo.svg"
+          ></img>
           <div className="new-user">
             <h2>Criar novos usuários</h2>
             <UserForm
@@ -110,8 +114,6 @@ export default class User extends Component {
               ></UserCard>
             ))}
           </div>
-
-          <div>loading</div>
         </div>
       </>
     );

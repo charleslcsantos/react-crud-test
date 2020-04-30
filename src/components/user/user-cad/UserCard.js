@@ -37,7 +37,7 @@ export default class UserCard extends Component {
     if (user) {
       await this.setState({
         ...this.state,
-        user: user,
+        user,
       });
       if (this.props.onSave) {
         this.props.onSave(null);

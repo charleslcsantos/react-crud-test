@@ -73,13 +73,13 @@ export default class User extends Component {
       alerts.splice(0, 1);
       this.setState({
         ...this.state,
-        alerts: alerts,
+        alerts,
       });
     }, 7000);
 
     this.setState({
       ...this.state,
-      alerts: alerts,
+      alerts,
     });
   }
 

@@ -39,11 +39,23 @@ export default class UserForm extends Component {
 
   save(e) {
     e.preventDefault();
-    const user = this.state.user;
+    let user = this.state.user;
     UserService.save(user).then((user) => {
       if (this.props.onSave) {
         this.props.onSave(user);
       }
+      user = {
+        id: null,
+        name: "",
+        email: "",
+        phone: "",
+        username: "",
+        gender: "men",
+      };
+      this.setState({
+        ...this.state,
+        user,
+      });
     });
   }
 
@@ -120,7 +132,8 @@ UserForm.defaultProps = {
     id: null,
     name: "",
     email: "",
-    username: "",
     phone: "",
+    username: "",
+    gender: "men",
   },
 };

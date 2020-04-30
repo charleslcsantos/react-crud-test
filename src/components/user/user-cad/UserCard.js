@@ -30,15 +30,18 @@ export default class UserCard extends Component {
     });
   }
 
-  edit(user) {
-    this.setState({
+  async edit(user) {
+    await this.setState({
       canEditUser: !this.state.canEditUser,
     });
     if (user) {
-      this.setState({
+      await this.setState({
         ...this.state,
         user: user,
       });
+      if (this.props.onSave) {
+        this.props.onSave(null);
+      }
     }
   }
 

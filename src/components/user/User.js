@@ -29,18 +29,47 @@ export default class User extends Component {
     });
   }
 
+  onSave(result) {
+    const user = result;
+    let updatedUsers = [...this.state.users];
+    updatedUsers.push(user);
+
+    this.setState({
+      ...this.state,
+      users: updatedUsers,
+    });
+  }
+
+  async onRemove(index) {
+    let updatedUsers = [...this.state.users];
+    updatedUsers.splice(index, 1);
+
+    this.setState({
+      ...this.state,
+      users: updatedUsers,
+    });
+  }
+
   render() {
     return (
       <>
         <div className="container">
           <div className="new-user">
             <h2>Criar novos usuários</h2>
-            <UserForm user={this.state.user} />
+            <UserForm
+              user={this.state.user}
+              onSave={(result) => this.onSave(result)}
+            />
           </div>
 
           <div className="list user-list">
-            {this.state.users.map((user) => (
-              <UserCard key={user.id} user={user}></UserCard>
+            {this.state.users.map((user, index) => (
+              <UserCard
+                key={user.id}
+                user={user}
+                onSave={(result) => this.onSave(result)}
+                onRemove={() => this.onRemove(index)}
+              ></UserCard>
             ))}
           </div>
 

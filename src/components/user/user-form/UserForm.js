@@ -40,7 +40,11 @@ export default class UserForm extends Component {
   save(e) {
     e.preventDefault();
     const user = this.state.user;
-    UserService.save(user);
+    UserService.save(user).then((user) => {
+      if (this.props.onSave) {
+        this.props.onSave(user);
+      }
+    });
   }
 
   render() {

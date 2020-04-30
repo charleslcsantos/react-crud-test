@@ -12,13 +12,13 @@ export default class UserCard extends Component {
     this.state = {
       canShowDetail: false,
       canEditUser: false,
-      userBackup: {},
+      user: {},
     };
   }
 
   componentDidMount() {
     this.setState({
-      userBackup: this.props.user,
+      user: this.props.user,
     });
   }
 
@@ -34,11 +34,21 @@ export default class UserCard extends Component {
     this.setState({
       canEditUser: !this.state.canEditUser,
     });
+    if (user) {
+      this.setState({
+        ...this.state,
+        user: user,
+      });
+    }
   }
 
   remove(user) {
     if (window.confirm("Tem certeza que deseja apagar o registro?")) {
-      UserService.remove(user);
+      UserService.remove(user).then(() => {
+        if (this.props.onRemove) {
+          this.props.onRemove();
+        }
+      });
     }
   }
 
@@ -52,9 +62,9 @@ export default class UserCard extends Component {
           onClick={() => this.openDetail()}
         >
           <div className="user-card__pic">
-            <img src={this.props.user.avatar} alt="user avatar" />
+            <img src={this.state.user.avatar} alt="user avatar" />
           </div>
-          <div className="user-card__title"> {this.props.user.name} </div>
+          <div className="user-card__title"> {this.state.user.name} </div>
           <IconArrow></IconArrow>
         </div>
         {this.state.canShowDetail && (
@@ -62,19 +72,19 @@ export default class UserCard extends Component {
             {!this.state.canEditUser && (
               <div className="read-only">
                 <div className="user-info" title="#">
-                  {this.props.user.id}
+                  {this.state.user.id}
                 </div>
                 <div className="user-info" title="Nome">
-                  {this.props.user.name}
+                  {this.state.user.name}
                 </div>
                 <div className="user-info" title="Email">
-                  {this.props.user.email}
+                  {this.state.user.email}
                 </div>
                 <div className="user-info" title="Username">
-                  {this.props.user.username}
+                  {this.state.user.username}
                 </div>
                 <div className="user-info" title="Telefone">
-                  {this.props.user.phone}
+                  {this.state.user.phone}
                 </div>
                 <div className="list__actions">
                   <button className="btn" onClick={() => this.edit()}>
@@ -82,7 +92,7 @@ export default class UserCard extends Component {
                   </button>
                   <button
                     className="btn"
-                    onClick={() => this.remove(this.props.user)}
+                    onClick={() => this.remove(this.state.user)}
                   >
                     <IconRemove>Remover</IconRemove>
                   </button>
@@ -91,7 +101,8 @@ export default class UserCard extends Component {
             )}
             {this.state.canEditUser && (
               <UserForm
-                user={this.props.user}
+                user={this.state.user}
+                onSave={(user) => this.edit(user)}
                 onClickCancel={() => this.edit()}
               />
             )}

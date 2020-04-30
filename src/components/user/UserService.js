@@ -21,7 +21,7 @@ const UserService = {
           body: JSON.stringify(user),
         });
         // this.alertService.alert(`O usuário ${user.name} foi alterado`, "success");
-        resolve(result);
+        resolve(result.json());
       } else {
         console.log("criar");
 
@@ -37,7 +37,7 @@ const UserService = {
             body: JSON.stringify(user),
           });
           //   this.alertService.alert(`O usuário ${user.name} foi criado`, "success");
-          resolve(result);
+          resolve(result.json());
         }
       }
     });

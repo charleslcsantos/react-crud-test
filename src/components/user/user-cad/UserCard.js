@@ -4,6 +4,7 @@ import UserForm from "../user-form/UserForm";
 import { IconEdit } from "../../shared/icons/icon-edit/IconEdit";
 import { IconRemove } from "../../shared/icons/icon-remove/IconRemove";
 import { IconArrow } from "../../shared/icons/icon-arrow/IconArrow";
+import UserService from "../UserService";
 
 export default class UserCard extends Component {
   constructor(props) {
@@ -30,11 +31,6 @@ export default class UserCard extends Component {
   }
 
   edit(user) {
-    // if (user) {
-    //   user = user;
-    // } else {
-    //   user = this.userBackup;
-    // }
     this.setState({
       canEditUser: !this.state.canEditUser,
     });
@@ -42,7 +38,7 @@ export default class UserCard extends Component {
 
   remove(user) {
     if (window.confirm("Tem certeza que deseja apagar o registro?")) {
-      // this.onClickRemove.emit();
+      UserService.remove(user);
     }
   }
 
@@ -84,7 +80,10 @@ export default class UserCard extends Component {
                   <button className="btn" onClick={() => this.edit()}>
                     <IconEdit>Editar</IconEdit>
                   </button>
-                  <button className="btn" onClick={() => this.remove()}>
+                  <button
+                    className="btn"
+                    onClick={() => this.remove(this.props.user)}
+                  >
                     <IconRemove>Remover</IconRemove>
                   </button>
                 </div>

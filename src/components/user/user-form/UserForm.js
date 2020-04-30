@@ -11,13 +11,14 @@ export default class UserForm extends Component {
         email: "",
         phone: "",
         username: "",
+        gender: "men",
       },
     };
   }
 
   componentDidMount() {
     this.setState({
-      user: this.props.user,
+      user: { ...this.props.user },
     });
   }
 
@@ -40,13 +41,6 @@ export default class UserForm extends Component {
     e.preventDefault();
     const user = this.state.user;
     UserService.save(user);
-
-    // UserService
-    //   .save(user)
-    //   .then(() => {
-    //     this.onClickSave.emit();
-    //   })
-    //   .catch(() => {});
   }
 
   render() {

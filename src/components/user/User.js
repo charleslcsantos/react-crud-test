@@ -10,6 +10,13 @@ export default class User extends Component {
 
     this.state = {
       users: [],
+      user: {
+        name: "",
+        email: "",
+        phone: "",
+        username: "",
+        gender: "men",
+      },
     };
   }
 
@@ -28,7 +35,7 @@ export default class User extends Component {
         <div className="container">
           <div className="new-user">
             <h2>Criar novos usuários</h2>
-            <UserForm />
+            <UserForm user={this.state.user} />
           </div>
 
           <div className="list user-list">
